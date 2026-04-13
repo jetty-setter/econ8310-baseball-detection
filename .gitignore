@@ -1,0 +1,28 @@
+# .gitignore for baseball-detection project
+
+# Each person's local config 
+config.py
+
+# Frame images — too large for GitHub
+frames/
+*.jpg
+*.jpeg
+*.png
+*.mov
+*.mp4
+
+# Model output and training results
+baseball_yolo/
+runs/
+*.pt
+*.onnx
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.env
+
+# Mac/Windows system files
+.DS_Store
+Thumbs.db
