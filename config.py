@@ -4,6 +4,6 @@ OUTPUT_DIR = "/Users/stephsimmons/Downloads/baseball_yolo"
 
 MODEL_SIZE  = "yolov8s.pt"
 EPOCHS      = 100
-IMG_SIZE    = 1280
+IMG_SIZE    = 640
 VAL_SPLIT   = 0.2
 RANDOM_SEED = 42

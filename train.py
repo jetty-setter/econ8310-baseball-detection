@@ -206,7 +206,7 @@ def train_model(yaml_path):
         data      = yaml_path,
         epochs    = EPOCHS,
         imgsz     = IMG_SIZE,
-        batch     = 4,
+        batch     = 2,
         device    = "mps",       # Apple Silicon GPU
         project   = str(Path(OUTPUT_DIR) / "runs"),
         name      = "baseball_detect",
