@@ -1,7 +1,3 @@
-# Baseball Detection - Econ 8310
-# Install all dependencies with:
-#   pip install -r requirements.txt
-
 ultralytics>=8.0.0      # YOLOv8 model training and inference (includes PyTorch)
 opencv-python>=4.8.0    # Image processing and visualization
 matplotlib>=3.7.0       # Training curve plots
