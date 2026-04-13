@@ -1,10 +1,3 @@
-"""
-setup.py — Run this ONCE before train.py to install all dependencies.
-
-Open Command Prompt and run:
-    python setup.py
-"""
-
 import subprocess
 import sys
 
