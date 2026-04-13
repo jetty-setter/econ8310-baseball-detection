@@ -1,6 +1,6 @@
-XML_DIR    = "/Users/stephsimmons/Downloads/baseball_detection/XMLs"
-FRAMES_DIR = "/Users/stephsimmons/Downloads/baseball_detection/frames"
-OUTPUT_DIR = "/Users/stephsimmons/Downloads/baseball_yolo"
+XML_DIR    = "/Users/stephsimmons/Downloads/baseball_detection/econ8310-baseball-detction/XMLs"
+FRAMES_DIR = "/Users/stephsimmons/Downloads/baseball_detection/econ8310-baseball-detction/frames"
+OUTPUT_DIR = "/Users/stephsimmons/Downloads/baseball_detection/baseball_yolo"
 
 MODEL_SIZE  = "yolov8n.pt"
 EPOCHS      = 50
