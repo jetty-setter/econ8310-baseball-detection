@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 import shutil
 import random
 import yaml
+import glob
 from pathlib import Path
  
 # Load user-specific paths and settings from config.py
@@ -229,13 +230,20 @@ def train_model(yaml_path):
  
  
 def evaluate_model():
+    #Evaluate the best saved model and print metrics
     from ultralytics import YOLO
- 
-    best = Path(OUTPUT_DIR) / "runs" / "baseball_detect" / "weights" / "best.pt"
+    import glob
+
+    runs = sorted(glob.glob(str(Path(OUTPUT_DIR) / "runs" / "baseball_detect*")))
+    if not runs:
+        print("No trained model found.")
+        return
+
+    best = Path(runs[-1]) / "weights" / "best.pt"
     if not best.exists():
         print("No trained model found.")
         return
- 
+
     print(f"\nEvaluating: {best}")
     model   = YOLO(str(best))
     metrics = model.val(
@@ -243,7 +251,7 @@ def evaluate_model():
         imgsz  = IMG_SIZE,
         device = "mps",
     )
- 
+
     print("\n========== RESULTS ==========")
     print(f"mAP@0.5:       {metrics.box.map50:.4f}")
     print(f"mAP@0.5-0.95:  {metrics.box.map:.4f}")
@@ -251,7 +259,6 @@ def evaluate_model():
     print(f"Recall:        {metrics.box.mr:.4f}")
     print("=============================")
     print("\nmAP@0.5 = detection accuracy at 50% IoU threshold (higher = better)")
- 
  
 def save_sample_predictions():
 
