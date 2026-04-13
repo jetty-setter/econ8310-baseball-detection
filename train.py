@@ -197,14 +197,14 @@ def train_model(yaml_path):
 
     print(f"\nLoading pre-trained model: {MODEL_SIZE}")
     model = YOLO(MODEL_SIZE)
-    print(f"Training for {EPOCHS} epochs on CPU — this will take a while!\n")
+    print(f"Training for {EPOCHS} epochs — this will take a while!\n")
 
     model.train(
         data     = yaml_path,
         epochs   = EPOCHS,
         imgsz    = IMG_SIZE,
         batch    = 4,
-        device   = "cpu",
+        device   = "mps",
         project  = str(Path(OUTPUT_DIR) / "runs"),
         name     = "baseball_detect",
         patience = 15,
@@ -228,7 +228,7 @@ def evaluate_model():
     metrics = model.val(
         data   = str(Path(OUTPUT_DIR) / "dataset.yaml"),
         imgsz  = IMG_SIZE,
-        device = "cpu",
+        device = "mps",
     )
 
     print("\n========== RESULTS ==========")
