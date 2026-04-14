@@ -221,7 +221,8 @@ def train_model(yaml_path):
         degrees   = 10.0,        # random rotation ±10°
         translate = 0.1,         # random translation
         scale     = 0.5,         # random zoom in/out
-        
+        cos_lr    = True,
+        freeze    = 10,
  
         save      = True,
         plots     = True,

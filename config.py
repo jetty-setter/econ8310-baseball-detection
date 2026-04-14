@@ -3,7 +3,7 @@ FRAMES_DIR = "/Users/stephsimmons/Downloads/baseball_detection/econ8310-baseball
 OUTPUT_DIR = "/Users/stephsimmons/Downloads/baseball_yolo"
 
 MODEL_SIZE  = "yolov8s.pt"
-EPOCHS      = 100
+EPOCHS      = 150
 IMG_SIZE    = 640
 VAL_SPLIT   = 0.2
 RANDOM_SEED = 42
