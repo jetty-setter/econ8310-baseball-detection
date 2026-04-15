@@ -210,7 +210,7 @@ def train_model(yaml_path):
         device    = "mps",       # Apple Silicon GPU
         project   = str(Path(OUTPUT_DIR) / "runs"),
         name      = "baseball_detect",
-        patience  = 20,          # early stopping patience
+        patience  = 50,          # early stopping patience
  
        
         hsv_h     = 0.015,       # hue variation
