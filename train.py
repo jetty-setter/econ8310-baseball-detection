@@ -2,8 +2,8 @@ import os
 import xml.etree.ElementTree as ET
 import shutil
 import random
-import yaml
 import glob
+import yaml
 from pathlib import Path
  
 # Load user-specific paths and settings from config.py
@@ -200,7 +200,7 @@ def train_model(yaml_path):
  
     print(f"\nLoading pre-trained model: {MODEL_SIZE}")
     model = YOLO(MODEL_SIZE)
-    print(f"Training for {EPOCHS} epochs on MPS (Apple Silicon)...\n")
+    print(f"Training for {EPOCHS} epochs on MPS...\n")
  
     model.train(
         data      = yaml_path,
