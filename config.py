@@ -1,9 +1,0 @@
-XML_DIR    = "/Users/stephsimmons/baseball_detection/econ8310-baseball-detection/XMLs"
-FRAMES_DIR = "/Users/stephsimmons/baseball_detection/econ8310-baseball-detection/frames"
-OUTPUT_DIR = "/Users/stephsimmons/baseball_yolo"
-
-MODEL_SIZE  = "yolov8s.pt"
-EPOCHS      = 150
-IMG_SIZE    = 640
-VAL_SPLIT   = 0.2
-RANDOM_SEED = 42
