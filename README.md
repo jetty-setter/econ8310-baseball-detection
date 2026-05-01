@@ -19,34 +19,35 @@ econ8310-baseball-detection/
 ├── yolo_learning_curve.ipynb   # Main script — run this
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # This file
-└── results/
-    ├── learning_curve.png          # 5-fraction learning curve plot
-    ├── learning_curve_results.csv  # Learning curve metrics (CSV)
-    ├── results_50epoch.png         # Best model training plot (50 epochs)
-    └── results_168frames.png       # Baseline model training plot (150 epochs)
+├── learning_curve.png          # 5-fraction learning curve plot
+├── learning_curve_results.csv  # Learning curve metrics (CSV)
+├── results_50epoch.png         # Best model training plot (50 epochs)
+└── results_168frames.png       # Baseline model training plot (150 epochs)
 ```
+
+---
+
+## Data
+
+The training data (pre-extracted frames and labels) is hosted on Google Drive. Download both zip files before running the notebook:
+
+- **Moving Frames:** https://drive.google.com/file/d/1_mQiaATB2yXy2BgIvmwlR2qi1KdiGyCR/view?usp=share_link
+- **Moving Labels:** https://drive.google.com/file/d/1wANEyPCtExq1I2IgjJpptYaGpbdLTvwM/view?usp=share_link
 
 ---
 
 ## How to Run
 
-### Prerequisites
-- Python 3.10+
-- Google Colab (recommended) or a machine with a CUDA-capable GPU
-- Annotated video data from the course OneDrive
+### Option A — Google Colab (Recommended)
 
-### Step 1 — Install dependencies
-```bash
-pip install -r requirements.txt
-```
-Or in Colab:
+1. Upload both zip files to your Google Drive
+2. Open `yolo_learning_curve.ipynb` in Colab
+3. Set runtime to **T4 GPU** (Runtime → Change runtime type → T4 GPU)
+4. Add this cell at the top and run it first:
+
 ```python
 !pip install ultralytics -q
-```
 
-### Step 2 — Upload your data
-If running on Google Colab, upload `moving_frames.zip` and `moving_labels.zip` to Google Drive, then mount Drive and unzip:
-```python
 from google.colab import drive
 drive.mount('/content/drive')
 
@@ -55,23 +56,36 @@ with zipfile.ZipFile('/content/drive/MyDrive/moving_frames.zip', 'r') as z:
     z.extractall('/content/moving_data')
 with zipfile.ZipFile('/content/drive/MyDrive/moving_labels.zip', 'r') as z:
     z.extractall('/content/moving_data')
+print("Done!")
 ```
 
-### Step 3 — Update paths
-At the top of `yolo_learning_curve.ipynb`, update only these three variables:
+5. Update the three path variables at the top of the notebook:
+
+```python
+XML_DIR    = "/content/moving_data"
+VIDEO_DIR  = "/content/moving_data"
+OUTPUT_DIR = "/content/moving_data"
+```
+
+6. Run all cells
+
+### Option B — Local Machine
+
+1. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+2. Download and unzip both data files from the Google Drive links above
+
+3. Update the three path variables at the top of the notebook:
 ```python
 XML_DIR    = "/path/to/Annotations"
 VIDEO_DIR  = "/path/to/Raw Videos"
 OUTPUT_DIR = "/path/to/Output"
 ```
-If using pre-extracted frames (as in this repo), set all three to the folder containing `moving_frames/` and `moving_labels/`.
 
-### Step 4 — Run the notebook
-Run all cells top to bottom. The notebook will:
-1. Load pre-extracted moving-ball frames and labels
-2. Split into 80% train / 20% validation
-3. Run a learning curve sweep (5 models at 10%, 30%, 50%, 70%, 100%)
-4. Save results to `learning_curve_results.csv` and `learning_curve.png`
+4. Run all cells in `yolo_learning_curve.ipynb`
 
 ---
 
@@ -84,7 +98,7 @@ Run all cells top to bottom. The notebook will:
 | `TRAIN_FRACTIONS` | `[0.10, 0.30, 0.50, 0.70, 1.00]` | Learning curve fractions |
 | `VAL_SPLIT` | `0.2` | 20% held out for validation |
 | `RANDOM_SEED` | `42` | Fixed seed for reproducibility |
-| `device` | `cuda` | Change to `mps` (Mac) or `cpu` |
+| `device` | auto-detected | Selects cuda / mps / cpu automatically |
 
 ---
 
@@ -111,6 +125,6 @@ See `requirements.txt`. Key packages:
 
 ## Notes
 
-- The `device` parameter auto-selects GPU if available. To manually set: `"cuda"` (NVIDIA), `"mps"` (Apple Silicon), or `"cpu"`.
-- Two frames are flagged as corrupt and automatically excluded during training.
-- The learning curve uses a fixed validation set across all 5 runs to ensure comparisons are directly meaningful.
+- Device is auto-detected: CUDA (NVIDIA GPU) → MPS (Apple Silicon) → CPU
+- Two frames are flagged as corrupt and automatically excluded during training
+- The learning curve uses a fixed validation set across all 5 runs to ensure comparisons are directly meaningful
